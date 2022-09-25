@@ -1,0 +1,604 @@
+
+Please cite as: 
+
+ Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+ R package version 5.2.2. https://CRAN.R-project.org/package=stargazer 
+
+
+Please cite as: 
+
+ Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+ R package version 5.2.2. https://CRAN.R-project.org/package=stargazer 
+
+
+Please cite as: 
+
+ Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+ R package version 5.2.2. https://CRAN.R-project.org/package=stargazer 
+
+
+Please cite as: 
+
+ Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+ R package version 5.2.2. https://CRAN.R-project.org/package=stargazer 
+
+Version:  1.37.5
+Date:     2020-06-17
+Author:   Philip Leifeld (University of Essex)
+
+Consider submitting praise using the praise or praise_interactive functions.
+Please cite the JSS article in your publications -- see citation("texreg").
+Version:  1.37.5
+Date:     2020-06-17
+Author:   Philip Leifeld (University of Essex)
+
+Consider submitting praise using the praise or praise_interactive functions.
+Please cite the JSS article in your publications -- see citation("texreg").
+Version:  1.37.5
+Date:     2020-06-17
+Author:   Philip Leifeld (University of Essex)
+
+Consider submitting praise using the praise or praise_interactive functions.
+Please cite the JSS article in your publications -- see citation("texreg").
+Version:  1.37.5
+Date:     2020-06-17
+Author:   Philip Leifeld (University of Essex)
+
+Consider submitting praise using the praise or praise_interactive functions.
+Please cite the JSS article in your publications -- see citation("texreg").
+Loading required package: lme4
+Loading required package: lme4
+Loading required package: lme4
+Loading required package: lme4
+Loading required package: Matrix
+Loading required package: Matrix
+Loading required package: Matrix
+Loading required package: Matrix
+************
+Welcome to afex. For support visit: http://afex.singmann.science/
+- Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()
+- Methods for calculating p-values with mixed(): 'S', 'KR', 'LRT', and 'PB'
+- 'afex_aov' and 'mixed' objects can be passed to emmeans() for follow-up tests
+- NEWS: emmeans() for ANOVA models now uses model = 'multivariate' as default.
+- Get and set global package options with: afex_options()
+- Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()
+- For example analyses see: browseVignettes("afex")
+************
+************
+Welcome to afex. For support visit: http://afex.singmann.science/
+************
+Welcome to afex. For support visit: http://afex.singmann.science/
+- Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()
+- Methods for calculating p-values with mixed(): 'S', 'KR', 'LRT', and 'PB'
+- 'afex_aov' and 'mixed' objects can be passed to emmeans() for follow-up tests
+- NEWS: emmeans() for ANOVA models now uses model = 'multivariate' as default.
+- Get and set global package options with: afex_options()
+- Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()
+- For example analyses see: browseVignettes("afex")
+************
+- Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()
+- Methods for calculating p-values with mixed(): 'S', 'KR', 'LRT', and 'PB'
+- 'afex_aov' and 'mixed' objects can be passed to emmeans() for follow-up tests
+- NEWS: emmeans() for ANOVA models now uses model = 'multivariate' as default.
+- Get and set global package options with: afex_options()
+- Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()
+- For example analyses see: browseVignettes("afex")
+************
+************
+Welcome to afex. For support visit: http://afex.singmann.science/
+- Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()
+- Methods for calculating p-values with mixed(): 'S', 'KR', 'LRT', and 'PB'
+- 'afex_aov' and 'mixed' objects can be passed to emmeans() for follow-up tests
+- NEWS: emmeans() for ANOVA models now uses model = 'multivariate' as default.
+- Get and set global package options with: afex_options()
+- Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()
+- For example analyses see: browseVignettes("afex")
+************
+
+Attaching package: ‘afex’
+
+
+Attaching package: ‘afex’
+
+
+Attaching package: ‘afex’
+
+
+Attaching package: ‘afex’
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+Loading required package: ggplot2
+Loading required package: ggplot2
+Loading required package: ggplot2
+Loading required package: ggplot2
+Loading required package: ggpp
+Loading required package: ggpp
+Loading required package: ggpp
+Loading required package: ggpp
+
+Attaching package: ‘ggpp’
+
+
+Attaching package: ‘ggpp’
+
+
+Attaching package: ‘ggpp’
+
+
+Attaching package: ‘ggpp’
+
+The following object is masked from ‘package:ggplot2’:
+
+    annotate
+
+The following object is masked from ‘package:ggplot2’:
+
+    annotate
+
+The following object is masked from ‘package:ggplot2’:
+
+    annotate
+
+The following object is masked from ‘package:ggplot2’:
+
+    annotate
+
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading 'brms' package (version 2.12.0). Useful instructions
+can be found by typing help('brms'). A more detailed introduction
+to the package is available through vignette('brms_overview').
+Loading 'brms' package (version 2.12.0). Useful instructions
+can be found by typing help('brms'). A more detailed introduction
+to the package is available through vignette('brms_overview').
+Loading 'brms' package (version 2.12.0). Useful instructions
+can be found by typing help('brms'). A more detailed introduction
+to the package is available through vignette('brms_overview').
+Loading 'brms' package (version 2.12.0). Useful instructions
+can be found by typing help('brms'). A more detailed introduction
+to the package is available through vignette('brms_overview').
+
+Attaching package: ‘brms’
+
+
+Attaching package: ‘brms’
+
+
+Attaching package: ‘brms’
+
+
+Attaching package: ‘brms’
+
+The following object is masked from ‘package:lme4’:
+
+    ngrps
+
+The following object is masked from ‘package:lme4’:
+
+    ngrps
+
+The following object is masked from ‘package:lme4’:
+
+    ngrps
+
+The following object is masked from ‘package:lme4’:
+
+    ngrps
+
+The following object is masked from ‘package:stats’:
+
+    ar
+
+The following object is masked from ‘package:stats’:
+
+    ar
+
+The following object is masked from ‘package:stats’:
+
+    ar
+
+The following object is masked from ‘package:stats’:
+
+    ar
+
+This is bayesplot version 1.8.1
+This is bayesplot version 1.8.1
+This is bayesplot version 1.8.1
+- Online documentation and vignettes at mc-stan.org/bayesplot
+- bayesplot theme set to bayesplot::theme_default()
+This is bayesplot version 1.8.1
+- Online documentation and vignettes at mc-stan.org/bayesplot
+   * Does _not_ affect other ggplot2 plots
+- Online documentation and vignettes at mc-stan.org/bayesplot
+- bayesplot theme set to bayesplot::theme_default()
+- Online documentation and vignettes at mc-stan.org/bayesplot
+   * Does _not_ affect other ggplot2 plots
+   * See ?bayesplot_theme_set for details on theme setting
+- bayesplot theme set to bayesplot::theme_default()
+- bayesplot theme set to bayesplot::theme_default()
+   * See ?bayesplot_theme_set for details on theme setting
+   * Does _not_ affect other ggplot2 plots
+   * Does _not_ affect other ggplot2 plots
+   * See ?bayesplot_theme_set for details on theme setting
+   * See ?bayesplot_theme_set for details on theme setting
+
+Attaching package: ‘MESS’
+
+
+Attaching package: ‘MESS’
+
+
+Attaching package: ‘MESS’
+
+
+Attaching package: ‘MESS’
+
+The following objects are masked from ‘package:bayestestR’:
+
+    auc, rnorm_perfect
+
+The following objects are masked from ‘package:bayestestR’:
+
+    auc, rnorm_perfect
+
+The following objects are masked from ‘package:bayestestR’:
+
+    auc, rnorm_perfect
+
+The following objects are masked from ‘package:bayestestR’:
+
+    auc, rnorm_perfect
+
+Loading required package: parallel
+Loading required package: parallel
+Loading required package: parallel
+Loading required package: parallel
+
+DEoptim package
+Differential Evolution algorithm in R
+Authors: D. Ardia, K. Mullen, B. Peterson and J. Ulrich
+
+
+DEoptim package
+Differential Evolution algorithm in R
+Authors: D. Ardia, K. Mullen, B. Peterson and J. Ulrich
+
+
+DEoptim package
+Differential Evolution algorithm in R
+Authors: D. Ardia, K. Mullen, B. Peterson and J. Ulrich
+
+
+DEoptim package
+Differential Evolution algorithm in R
+Authors: D. Ardia, K. Mullen, B. Peterson and J. Ulrich
+
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+✔ tibble  3.1.6     ✔ dplyr   1.0.7
+✔ tidyr   1.1.4     ✔ stringr 1.4.0
+✔ readr   2.1.1     ✔ forcats 0.5.1
+✔ purrr   0.3.4     
+✔ tibble  3.1.6     ✔ dplyr   1.0.7
+✔ tidyr   1.1.4     ✔ stringr 1.4.0
+✔ readr   2.1.1     ✔ forcats 0.5.1
+✔ purrr   0.3.4     
+✔ tibble  3.1.6     ✔ dplyr   1.0.7
+✔ tidyr   1.1.4     ✔ stringr 1.4.0
+✔ readr   2.1.1     ✔ forcats 0.5.1
+✔ purrr   0.3.4     
+✔ tibble  3.1.6     ✔ dplyr   1.0.7
+✔ tidyr   1.1.4     ✔ stringr 1.4.0
+✔ readr   2.1.1     ✔ forcats 0.5.1
+✔ purrr   0.3.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ ggpp::annotate() masks ggplot2::annotate()
+✖ tidyr::expand()  masks Matrix::expand()
+✖ tidyr::extract() masks texreg::extract()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+✖ tidyr::pack()    masks Matrix::pack()
+✖ dplyr::select()  masks MASS::select()
+✖ tidyr::unpack()  masks Matrix::unpack()
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ ggpp::annotate() masks ggplot2::annotate()
+✖ tidyr::expand()  masks Matrix::expand()
+✖ tidyr::extract() masks texreg::extract()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+✖ tidyr::pack()    masks Matrix::pack()
+✖ dplyr::select()  masks MASS::select()
+✖ tidyr::unpack()  masks Matrix::unpack()
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ ggpp::annotate() masks ggplot2::annotate()
+✖ tidyr::expand()  masks Matrix::expand()
+✖ tidyr::extract() masks texreg::extract()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+✖ tidyr::pack()    masks Matrix::pack()
+✖ dplyr::select()  masks MASS::select()
+✖ tidyr::unpack()  masks Matrix::unpack()
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ ggpp::annotate() masks ggplot2::annotate()
+✖ tidyr::expand()  masks Matrix::expand()
+✖ tidyr::extract() masks texreg::extract()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+✖ tidyr::pack()    masks Matrix::pack()
+✖ dplyr::select()  masks MASS::select()
+✖ tidyr::unpack()  masks Matrix::unpack()
+Loading required package: lattice
+Loading required package: lattice
+Loading required package: lattice
+Loading required package: lattice
+Loading required package: survival
+Loading required package: survival
+Loading required package: survival
+Loading required package: survival
+
+Attaching package: ‘survival’
+
+
+Attaching package: ‘survival’
+
+
+Attaching package: ‘survival’
+
+
+Attaching package: ‘survival’
+
+The following object is masked from ‘package:brms’:
+
+    kidney
+
+The following object is masked from ‘package:brms’:
+
+    kidney
+
+The following object is masked from ‘package:brms’:
+
+    kidney
+
+The following object is masked from ‘package:brms’:
+
+    kidney
+
+Loading required package: Formula
+Loading required package: Formula
+Loading required package: Formula
+Loading required package: Formula
+
+Attaching package: ‘Hmisc’
+
+
+Attaching package: ‘Hmisc’
+
+
+Attaching package: ‘Hmisc’
+
+
+Attaching package: ‘Hmisc’
+
+The following objects are masked from ‘package:dplyr’:
+
+    src, summarize
+
+The following objects are masked from ‘package:dplyr’:
+
+    src, summarize
+
+The following objects are masked from ‘package:dplyr’:
+
+    src, summarize
+
+The following objects are masked from ‘package:dplyr’:
+
+    src, summarize
+
+The following objects are masked from ‘package:xtable’:
+
+    label, label<-
+
+The following objects are masked from ‘package:xtable’:
+
+    label, label<-
+
+The following objects are masked from ‘package:xtable’:
+
+    label, label<-
+
+The following objects are masked from ‘package:xtable’:
+
+    label, label<-
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, units
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, units
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, units
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, units
+
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+
+Attaching package: ‘jsonlite’
+
+
+Attaching package: ‘jsonlite’
+
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Loading required package: StanHeaders
+Loading required package: StanHeaders
+Loading required package: StanHeaders
+Loading required package: StanHeaders
+rstan (Version 2.19.2, GitRev: 2e1f913d3ca3)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+options(mc.cores = parallel::detectCores()).
+To avoid recompilation of unchanged Stan programs, we recommend calling
+rstan_options(auto_write = TRUE)
+rstan (Version 2.19.2, GitRev: 2e1f913d3ca3)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+options(mc.cores = parallel::detectCores()).
+To avoid recompilation of unchanged Stan programs, we recommend calling
+rstan_options(auto_write = TRUE)
+rstan (Version 2.19.2, GitRev: 2e1f913d3ca3)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+options(mc.cores = parallel::detectCores()).
+To avoid recompilation of unchanged Stan programs, we recommend calling
+rstan_options(auto_write = TRUE)
+rstan (Version 2.19.2, GitRev: 2e1f913d3ca3)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+options(mc.cores = parallel::detectCores()).
+To avoid recompilation of unchanged Stan programs, we recommend calling
+rstan_options(auto_write = TRUE)
+
+Attaching package: ‘rstan’
+
+
+Attaching package: ‘rstan’
+
+
+Attaching package: ‘rstan’
+
+The following object is masked from ‘package:tidyr’:
+
+    extract
+
+The following object is masked from ‘package:tidyr’:
+
+    extract
+
+The following object is masked from ‘package:tidyr’:
+
+    extract
+
+The following object is masked from ‘package:texreg’:
+
+    extract
+
+
+Attaching package: ‘rstan’
+
+The following object is masked from ‘package:texreg’:
+
+    extract
+
+The following object is masked from ‘package:texreg’:
+
+    extract
+
+The following object is masked from ‘package:tidyr’:
+
+    extract
+
+The following object is masked from ‘package:texreg’:
+
+    extract
+
+Loading required package: shiny
+Loading required package: shiny
+Loading required package: shiny
+Loading required package: shiny
+
+Attaching package: ‘shiny’
+
+The following object is masked from ‘package:jsonlite’:
+
+    validate
+
+
+Attaching package: ‘shiny’
+
+
+Attaching package: ‘shiny’
+
+
+Attaching package: ‘shiny’
+
+The following object is masked from ‘package:pander’:
+
+    p
+
+The following object is masked from ‘package:jsonlite’:
+
+    validate
+
+The following object is masked from ‘package:jsonlite’:
+
+    validate
+
+The following object is masked from ‘package:jsonlite’:
+
+    validate
+
+The following object is masked from ‘package:pander’:
+
+    p
+
+The following object is masked from ‘package:pander’:
+
+    p
+
+The following object is masked from ‘package:pander’:
+
+    p
+
+
+This is shinystan version 2.5.0
+
+
+This is shinystan version 2.5.0
+
+
+This is shinystan version 2.5.0
+
+
+This is shinystan version 2.5.0
+
