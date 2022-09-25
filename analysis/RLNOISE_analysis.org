@@ -1,0 +1,274 @@
+#+TITLE: IGT
+#+DATE: 
+#+AUTHOR: the author
+#+EMAIL: the email
+#+REVEAL_INIT_OPTIONS: width:1200, height:800, transition:'none'
+#+REVEAL_ROOT: file:///Users/thibault/thib/reveal.js
+#+OPTIONS: toc:1 reveal_single_file:t num:nil 
+#+REVEAL_EXTRA_CSS: /Users/thibault/thib/reveal.js/local.css
+#+REVEAL_THEME: simple 
+# #+REVEAL_HLEVEL: 999 #minimum number of slides in first level
+#+OPTIONS: author:nil date:nil email:nil
+#+OPTIONS: timestamp:nil
+#+OPTIONS: reveal_title_slide:auto 
+
+:Options_R:
+#+property: :session *R*
+#+property: header-args:R :exports results
+#+property: header-args:R :eval never-export
+#+property: header-args:R+ :tangle yes
+#+property: header-args:R+ :session
+#+property: header-args:R+ :results output 
+:end:
+
+# clean output
+#+begin_src emacs-lisp :exports none
+   ;(org-babel-map-src-blocks nil (org-babel-remove-result))
+#+end_src
+
+#+RESULTS:
+
+* Models
+
+
+** RW 
+
+** Rescrola-Wagner
+Utility:  $v(\text{gain}, \text{loss}) = \text{gain}^\alpha - \text{loss}^\alpha$ ($\alpha \in [0,1]) et $v(t) = v(gain(t)) - v(loss(t))$.
+
+Exploitation: $\text{exploit}(t+1,k)=\text{exploit}(t,k) + \eta(t,k)  A  (v(t) -  \text{exploit}(t,k))$
+
+Perseveration: $p(t+1,k) = \eta(t,k)$ (
+
+Choice: $Pr(\text{choice}(t) = d) = \text{softmax}(\theta(\text{explore}) +\text{persev}p))$ ($\theta = 3^\beta-1$, $\text{persev}\in \mathbb R$).
+
+** Rescrola-Wagner + noise (Findling & al, 2019)
+
+Exploitation: $\text{exploit}(t+1,k) = \text{exploit}(t,k) + \eta(t,k)(A(v(t) -  \text{exploit}(t,k)) +\zeta\varepsilon(t))$, with $\varepsilon \sim \mathcal N(0,|v(t)|^2)$ and $\zeta\in [0,2]$. 
+
+* Results
+
+** Data
+
+#+BEGIN_SRC R  :results none  :tangle yes  :session :exports none 
+  rm(list=ls(all=TRUE))## efface les données
+  source('~/thib/projects/tools/R_lib.r')
+  setwd('~/thib/projects/RLNOISE/analysis/')
+  load('summary_indiv.rdata') ## summary.all
+  load( 'pred_all.rdata') ## pred.all
+  load('obs.rdata') ## obs.all
+#+END_SRC
+
+#+BEGIN_SRC R  :results output   :tangle yes  :session :exports results 
+  pred.all <- pred.all %>%
+      relocate(c(model, subjID), .before = 1)
+  ## create an outlier variable
+  ## = 1 if max(Rhat)>1.2 (fit did not converge), 0 otherwise
+  outlier <- summary.all %>%
+      group_by(model, subjID) %>%
+      mutate(Rmax = max(Rhat, na.rm = T)) %>%
+      mutate(outlier = ifelse(Rmax>1.2, 1,0)) %>%
+      filter(param == 'alpha') %>%
+      select(model, subjID, outlier) %>%
+      ungroup()
+  out  <- outlier %>%
+      group_by(model) %>%
+      summarise(outlier = sum(outlier, na.rm = TRUE)) %>%
+      pivot_wider(names_from = model, values_from = outlier)
+   #print(kable(out))
+#+END_SRC
+
+#+RESULTS:
+
+
+** Prediction accuracy 
+
+#+BEGIN_SRC R  :results output  :tangle yes  :session :exports results 
+  accuracy.summary <- accuracy %>%
+      filter(outlier == 0) %>%
+      group_by(model) %>%
+      summarise(acc = mean(acc, na.rm = TRUE)*100)
+  a.summary <- accuracy.summary %>%
+    pivot_wider(names_from = model, values_from = acc) 
+  print(kable(a.summary, digits = 2))
+#+END_SRC
+
+#+RESULTS:
+: 
+: 
+: |   pvl| pvl_noise|   vse| vse_noise|
+: |-----:|---------:|-----:|---------:|
+: | 55.38|     55.51| 58.22|     58.17|
+
+
+
+** AIC (By model)
+
+
+#+BEGIN_SRC R  :results output  :tangle yes  :session :exports results 
+  aic.summary <- d %>%
+    group_by(model) %>%
+    filter(outlier == 0) %>%
+    summarise(AIC = mean(AIC)) %>%
+    pivot_wider(names_from = model, values_from = AIC) 
+  print(kable(aic.summary, digits = 1))
+
+#+END_SRC
+
+#+RESULTS:
+: 
+: 
+: |   pvl| pvl_noise|   vse| vse_noise|
+: |-----:|---------:|-----:|---------:|
+: | 241.9|     243.6| 233.6|     235.6|
+
+
+* Parameters
+
+** Overview (mean)
+#+BEGIN_SRC R  :results output  :tangle yes  :session :exports results 
+  d.param <- d %>%
+    filter(outlier == 0) %>%
+    select(model, param, mean) %>%
+    group_by(param, model) %>%
+    summarise(mean = mean(mean, na.rm = TRUE)) %>%
+    pivot_wider(names_from = param, values_from = mean) 
+  print(kable(d.param, digit = 2))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+
+|model     |species |    A| alpha| cons| delta| gamma| persev|   phi| zeta|
+|:---------|:-------|----:|-----:|----:|-----:|-----:|------:|-----:|----:|
+|pvl       |human   | 0.48|  0.42| 0.79|    NA|    NA|   0.73|    NA|   NA|
+|pvl       |mice    | 0.19|  1.04| 0.73|    NA|    NA|   0.23|    NA|   NA|
+|pvl_noise |human   | 0.54|  0.42| 0.66|    NA|    NA|   0.72|    NA| 2.05|
+|pvl_noise |mice    | 0.24|  0.95| 0.48|    NA|    NA|   0.21|    NA| 2.04|
+|vse       |human   |   NA|  0.39| 0.73|  0.52|  0.48|     NA| -0.05|   NA|
+|vse       |mice    |   NA|  0.75| 0.12|  0.77|  0.49|     NA| -0.17|   NA|
+|vse_noise |human   |   NA|  0.43| 0.68|  0.53|  0.48|     NA| -0.14| 0.28|
+|vse_noise |mice    |   NA|  0.72| 0.11|  0.78|  0.49|     NA| -0.20| 0.61|
+#+end_example
+
+
+** Overview (median)
+#+BEGIN_SRC R  :results output  :tangle yes  :session :exports results 
+  d.param <- d %>%
+    filter(outlier == 0) %>%
+    select(model, param, mean) %>%
+    group_by(param, model) %>%
+    summarise(median = median(mean, na.rm = TRUE)) %>%
+    pivot_wider(names_from = param, values_from = median) 
+  print(kable(d.param, digit = 2))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+
+|model     |species |    A| alpha| cons| delta| gamma| persev|   phi| zeta|
+|:---------|:-------|----:|-----:|----:|-----:|-----:|------:|-----:|----:|
+|pvl       |human   | 0.47|  0.30| 0.72|    NA|    NA|   0.74|    NA|   NA|
+|pvl       |mice    | 0.11|  0.98| 0.61|    NA|    NA|   0.21|    NA|   NA|
+|pvl_noise |human   | 0.54|  0.31| 0.58|    NA|    NA|   0.74|    NA| 1.77|
+|pvl_noise |mice    | 0.17|  0.99| 0.35|    NA|    NA|   0.23|    NA| 1.35|
+|vse       |human   |   NA|  0.29| 0.68|  0.51|  0.47|     NA| -0.14|   NA|
+|vse       |mice    |   NA|  0.74| 0.10|  0.86|  0.50|     NA| -0.13|   NA|
+|vse_noise |human   |   NA|  0.32| 0.62|  0.51|  0.47|     NA| -0.24| 0.20|
+|vse_noise |mice    |   NA|  0.64| 0.09|  0.88|  0.50|     NA| -0.14| 0.60|
+#+end_example
+
+
+
+# ** Test parameters
+
+# Mean (t-test)
+
+# #+BEGIN_SRC R  :results output  :tangle yes  :session :exports results 
+#   d.comp <- d %>%
+#     mutate(species = ifelse(study == 'mice', 'mice', 'human')) %>%
+#     filter(outlier == 0)
+#   d.ttest <- data.frame(model = character(), param = character(), pval = numeric())
+#   for (m in c('vse','vse_noise','pvl','pvl_noise')){
+#     if (m == 'vse'){
+#       p <-  c('alpha', 'cons', 'gamma', 'delta', 'phi')
+#     }else if (m == 'vse_noise'){
+#       p <- c('alpha', 'cons', 'gamma', 'delta', 'phi', 'zeta')
+#     }else if (m == 'pvl'){
+#       p <- c('alpha', 'A', 'persev', 'cons')
+#     }else if (m == 'pvl_noise'){
+#       p <-  c('alpha', 'A', 'persev', 'cons', 'zeta')
+#     }
+#     for (pp in p){
+#     mice <- d.comp %>% filter(species == 'mice', param == pp, model == m) 
+#     human <- d.comp %>% filter(species == 'human', param == pp, model == m)
+#     p.value = t.test(mice$mean, human$mean, paired=FALSE)$p.value
+#     ##bf.value <- extractBF(bf)$bf    
+#     d.ttest <- d.ttest %>%
+#       add_row(param = pp, model = m, pval = p.value)
+#     }
+#   }
+
+#   d.ttest <- d.ttest %>%  pivot_wider(names_from = param, values_from = pval)
+#   print(kable(d.ttest, digit = 4))
+
+# #+END_SRC 
+
+# #+RESULTS:
+# : 
+# : 
+# : |model     | alpha|   cons|  gamma| delta|    phi|   zeta|  A| persev|
+# : |:---------|-----:|------:|------:|-----:|------:|------:|--:|------:|
+# : |vse       |     0| 0.0000| 0.4266|     0| 0.2522|     NA| NA|     NA|
+# : |vse_noise |     0| 0.0000| 0.4088|     0| 0.5549| 0.0000| NA|     NA|
+# : |pvl       |     0| 0.4907|     NA|    NA|     NA|     NA|  0|      0|
+# : |pvl_noise |     0| 0.0050|     NA|    NA|     NA| 0.9696|  0|      0|
+
+
+# #+BEGIN_SRC R  :results output  :tangle yes  :session :exports results 
+#   d.comp <- d %>%
+#     mutate(species = ifelse(study == 'mice', 'mice', 'human')) %>%
+#     filter(outlier == 0)
+#   d.test <- data.frame(model = character(), param = character(), pval = numeric())
+#   for (m in c('vse','vse_noise','pvl','pvl_noise')){
+#     if (m == 'vse'){
+#       p <-  c('alpha', 'cons', 'gamma', 'delta', 'phi')
+#     }else if (m == 'vse_noise'){
+#       p <- c('alpha', 'cons', 'gamma', 'delta', 'phi', 'zeta')
+#     }else if (m == 'pvl'){
+#       p <- c('alpha', 'A', 'persev', 'cons')
+#     }else if (m == 'pvl_noise'){
+#       p <-  c('alpha', 'A', 'persev', 'cons', 'zeta')
+#     }
+#     for (pp in p){
+#     mice <- d.comp %>% filter(species == 'mice', param == pp, model == m) 
+#     human <- d.comp %>% filter(species == 'human', param == pp, model == m)
+#     test = mood.test(mice$mean, human$mean, paired=FALSE)
+#     p.value <- test$p.value
+#     d.test <- d.test %>%
+#       add_row(param = pp, model = m, pval = p.value)
+#     }
+#   }
+
+#   d.test <- d.test %>%  pivot_wider(names_from = param, values_from = pval)
+#   print(kable(d.test, digit = 4))
+# #+END_SRC 
+
+# Median (Mood's test)
+
+# #+RESULTS:
+# : 
+# : 
+# : |model     |  alpha|   cons| gamma|  delta| phi| zeta|  A| persev|
+# : |:---------|------:|------:|-----:|------:|---:|----:|--:|------:|
+# : |vse       | 0.0018| 0.0000|     0| 0.0033|   0|   NA| NA|     NA|
+# : |vse_noise | 0.2389| 0.0000|     0| 0.0003|   0|    0| NA|     NA|
+# : |pvl       | 0.0000| 0.0000|    NA|     NA|  NA|   NA|  0|      0|
+# : |pvl_noise | 0.0000| 0.0652|    NA|     NA|  NA|    0|  0|      0|
+
+
+
+
+
