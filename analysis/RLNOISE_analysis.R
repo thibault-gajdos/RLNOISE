@@ -73,17 +73,15 @@ aic.summary <- d %>%
 print(kable(aic.summary, digits = 1))
 
 d.param <- d %>%
-  filter(outlier == 0) %>%
-  select(model, param, mean) %>%
-  group_by(param, model) %>%
-  summarise(mean = mean(mean, na.rm = TRUE)) %>%
-  pivot_wider(names_from = param, values_from = mean) 
+    filter(outlier == 0) %>%
+    select(model, param,  `2.5%`,  `50%`, `97.5%`, n_eff,   Rhat) %>%
+    group_by(param, model) %>%
+    summarise(`2.5%` =  mean(`2.5%`, na.rm = TRUE),
+              `50%` = mean(`50%`, na.rm = TRUE),
+              `97.5%` = mean(`97.5%`, na.rm = TRUE),
+              n_eff = mean(n_eff, na.rm = TRUE),
+              Rhat = mean(Rhat, na.rm = TRUE)
+              )
+
 print(kable(d.param, digit = 2))
 
-d.param <- d %>%
-  filter(outlier == 0) %>%
-  select(model, param, mean) %>%
-  group_by(param, model) %>%
-  summarise(median = median(mean, na.rm = TRUE)) %>%
-  pivot_wider(names_from = param, values_from = median) 
-print(kable(d.param, digit = 2))
