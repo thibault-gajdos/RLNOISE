@@ -21,12 +21,13 @@ clc
 subjlist = 01:30;
 nsubj = numel(subjlist);
 
-for isubj = 1:nsubj
-    
+for isubj = 15:nsubj
+
     % load file
-    fname = sprintf('./data/RLNOISE_exp2/RLNOISE_exp2_S%02d_data.mat',subjlist(isubj));
+    fname = sprintf('./RLNOISE_exp2/RLNOISE_exp2_S%02d_data.mat',subjlist(isubj));
+    fname_csv = sprintf('./RLNOISE_exp2/RLNOISE_exp2_S%02d_data.csv',subjlist(isubj));
     load(fname,'expe');
-    
+
     % get data
     fbtype = []; % feedback type
     resp   = []; % response
@@ -42,7 +43,8 @@ for isubj = 1:nsubj
         rew = cat(1,rew,expe(iblk).vs'/100);
         trl = cat(1,trl,(1:96)');
     end
-    
-    % do whatever you want to do with the data
-    
+
+    x = [fbtype, resp, rew, trl]
+    csvwrite(fname_csv,x)
+
 end
