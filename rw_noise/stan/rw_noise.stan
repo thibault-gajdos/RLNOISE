@@ -62,7 +62,6 @@ model {
     // update EV
     for (k in 1:2){
 	  ev[k] += A * (curUtil - ev[k])+ noise[t] * fabs(ev[choice[t]] - curUtil) * zeta;
-	p[k] = 1;
     }
   }
 }

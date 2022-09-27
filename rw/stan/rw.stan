@@ -21,7 +21,7 @@ parameters {
 
 transformed parameters {
   // Transform subject-level raw parameters
-  real<lower=0, upper=2>  alpha;
+  real<lower=0, upper=2>  A;
   real<lower=0, upper=5>  cons;
 
   A      = Phi_approx(A_pr);
@@ -31,7 +31,6 @@ transformed parameters {
 model {
   // Define values
   vector[2] ev;      // expected value
-  vector[2] p;       // perseveration bias
   real curUtil;     // utility of curFb
   real theta;       // theta = 3^c - 1
   
