@@ -11,10 +11,10 @@ setwd('~/thib/projects/RLNOISE/analysis/')
 
 load('../data/data_RLNOISE.rdata')
 models <- c('rw', 'rw_noise')
-subjects = c(1:30)
+subjects = c(1:29)
 ## predictions and fitted parameters
-params.rw = c('A', 'alpha', 'cons', 'persev')
-params.rw.noise = c('A', 'alpha', 'cons', 'zeta','persev')
+params.rw = c('A',  'cons')
+params.rw.noise = c('A',  'cons', 'zeta')
 mat = matrix(ncol = 0, nrow = 0)
 summary.all = data.frame(mat)
 pred.all = data.frame(mat)
