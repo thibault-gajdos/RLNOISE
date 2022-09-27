@@ -20,7 +20,6 @@ data <- data %>%
 data.full <- data 
 data <- data %>%
     mutate(gain = ifelse(choice == 1, reward1, reward2)) %>%
-    mutate(loss = 0) %>%
     filter(fbtype == 1) %>% ##partial condition
     select(subjID, choice, gain, loss)
 save(data, file = "data_RLNOISE_2.rdata")
