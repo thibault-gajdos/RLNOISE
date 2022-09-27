@@ -7,23 +7,6 @@ load( 'accuracy.rdata') ## accuracy
 load('obs.rdata') ## obs.all
 
 pred.all <- pred.all %>%
-      relocate(c(model, subjID), .before = 1)
-  ## create an outlier variable
-  ## = 1 if max(Rhat)>1.2 (fit did not converge), 0 otherwise
-  outlier <- summary.all %>%
-      group_by(model, subjID) %>%
-      mutate(Rmax = max(Rhat, na.rm = T)) %>%
-      mutate(outlier = ifelse(Rmax>1.1, 1,0)) %>%
-      filter(param == 'alpha') %>%
-      select(model, subjID, outlier) %>%
-      ungroup()
-  out  <- outlier %>%
-      group_by(model) %>%
-      summarise(outlier = sum(outlier, na.rm = TRUE)) %>%
-      pivot_wider(names_from = model, values_from = outlier)
-print(kable(out))
-
-pred.all <- pred.all %>%
     relocate(c(model, subjID), .before = 1)
 ## create an outlier variable
 ## = 1 if max(Rhat)>1.12 (fit did not converge), 0 otherwise
@@ -31,7 +14,7 @@ outlier <- summary.all %>%
     group_by(model, subjID) %>%
     mutate(Rmax = max(Rhat, na.rm = T)) %>%
     mutate(outlier = ifelse(Rmax>1.1, 1,0)) %>%
-    filter(param == 'alpha') %>%
+    filter(param == 'A') %>%
     select(model, subjID, outlier) %>%
     ungroup()
 out  <- outlier %>%
@@ -56,8 +39,8 @@ print(kable(a.summary, digits = 2))
 
 d <- summary.all %>%
   mutate(k = case_when(
-	   model == 'rw' ~ 4,
-	   model == 'rw_noise' ~ 5
+	   model == 'rw' ~ 2,
+	   model == 'rw_noise' ~ 3
 	 )) %>%
     group_by(model, subjID) %>%
     mutate(Rmax = max(Rhat, na.rm = T)) %>%
