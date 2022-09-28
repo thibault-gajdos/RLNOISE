@@ -49,9 +49,7 @@ model {
     curUtil = gain[t];
     
     // update EV
-    for (k in 1:2){
-      ev[k] += A * (curUtil - ev[k]);
-    }
+      ev[choice[t]] += A * (curUtil - ev[choice[t]]);
   }
 }
 
@@ -89,9 +87,7 @@ generated quantities {
         curUtil = gain[t];
 
 	// choice
-	for (k in 1:2){
-	    ev[k] += A * (curUtil - ev[k]);
-	}	  
+	ev[choice[t]] += A * (curUtil - ev[choice[t]]);
       }
   }
 }
