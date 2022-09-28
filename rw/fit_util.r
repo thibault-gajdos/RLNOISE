@@ -1,13 +1,11 @@
-
-fit_indiv <- function (data, subject, model, delta = .99, iter = 20000, warmup = 10000){
+fit_indiv <- function (data, subject, model, delta = .99, iter = 10000, warmup = 5000){
     rstan_options(auto_write = FALSE)
     d <- data %>%
         filter(subjID == subject)
     data_list <- list(
         T        = nrow(d),
         choice   = d$choice,
-        gain  = d$gain,
-        loss = abs(d$loss)
+        gain  = d$gain
     )
     modelFile <- paste('./stan/',model,'.stan', sep = '')
     boolFalse <- F
