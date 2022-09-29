@@ -60,7 +60,7 @@ model {
     curUtil = gain[t];
     
     // update EV
-    ev[choice[t]] += A * (curUtil - ev[k])+ noise[t] * fabs(ev[choice[t]] - curUtil) * zeta;   
+    ev[choice[t]] += A * (curUtil - ev[choice[t]])+ noise[t] * fabs(ev[choice[t]] - curUtil) * zeta;   
   }
 }
 
@@ -98,7 +98,7 @@ generated quantities {
         curUtil = gain[t];
 
 	// choice
-	ev[choice[t]] += A * (curUtil - ev[k])+ noise[t] * fabs(ev[choice[t]] - curUtil) * zeta;  	  
+	ev[choice[t]] += A * (curUtil - ev[choice[t]])+ noise[t] * fabs(ev[choice[t]] - curUtil) * zeta;  	  
       }
   }
 }
