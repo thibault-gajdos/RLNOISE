@@ -9,14 +9,14 @@ data {
 }
 transformed data {
   vector[2] initV;
-  real noise[T];
+  //real noise[T];
   
   initV  = rep_vector(1.0, 2); //initialize expected value to 0
 
   //generate noise 
-  for (t in 1:T){
-      noise[t] =  normal_rng(0,.1);
-  }
+    //for (t in 1:T){
+    //  noise[t] =  normal_rng(0,.1);
+    //}
 }
 
 parameters {
@@ -40,6 +40,7 @@ transformed parameters {
 model {
   // Define values
   vector[2] ev;      // expected value
+  vector[2] ev_noise;      // noisy expected value
   real curUtil;     // utility of curFb
   real theta;       // theta = 3^c - 1
   
@@ -52,17 +53,23 @@ model {
   // Initialize values
   theta = pow(3, cons) -1;
   ev = initV; // initial ev values
+  ev_noise = initV;
   
   for (t in 1:T) {
     // softmax choice
     choice[t] ~ categorical_logit(theta * ev);
-
-    curUtil = gain[t];
     
     // update EV
-    ev[choice[t]] += A * (curUtil - ev[choice[t]])+ noise[t] * fabs(ev[choice[t]] - curUtil) * zeta;   
+    curUtil = gain[t];    
+    ev_noise[1] ~ normal(ev[1] + A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
+    ev_noise[2] ~ normal(ev[2] + A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
+    if (choice[t] == 1)
+      ev[1] = ev_noise[1];
+    if (choice[t] == 2)
+      ev[2] = ev_noise[2];
   }
 }
+
 
 generated quantities {
   // For log likelihood calculation
@@ -80,6 +87,7 @@ generated quantities {
   { // local section, this saves time and space
     // Define values
       vector[2] ev;
+      vector[2] ev_noise;      // noisy expected value
       real curUtil;     // utility of curFb
       real theta;       // theta = 3^c - 1
 
@@ -87,6 +95,7 @@ generated quantities {
       log_lik = 0;
       theta      = pow(3, cons) -1;
       ev         = initV; // initial ev values
+      ev_noise = initV;
 
       for (t in 1:T) {
         // softmax choice
@@ -98,10 +107,14 @@ generated quantities {
         curUtil = gain[t];
 
 	// choice
-	ev[choice[t]] += A * (curUtil - ev[choice[t]])+ noise[t] * fabs(ev[choice[t]] - curUtil) * zeta;  	  
+	ev_noise[1] = normal_rng(ev[1] + A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
+	ev_noise[2] = normal_rng(ev[2] + A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
+	if (choice[t] == 1)
+	  ev[1] = ev_noise[1];
+	if (choice[t] == 2)
+	  ev[2] = ev_noise[2];
       }
   }
 }
-
 
 
