@@ -20,7 +20,7 @@ transformed data {
 }
 
 parameters {
-  //Rraw parameters (for Matt trick)
+  //raw parameters (for Matt trick)
   real A_pr;
   real cons_pr;
   real zeta_pr;
@@ -30,11 +30,11 @@ transformed parameters {
   // Transform subject-level raw parameters
   real<lower=0, upper=1>  A;
   real<lower=0, upper=5>  cons;
-  real<lower=0, upper=10>  zeta;
+  real<lower=0, upper=1>  zeta;
 
   A      = Phi_approx(A_pr);
   cons   = Phi_approx(cons_pr) * 5;
-  zeta   = Phi_approx(zeta_pr) * 10;
+  zeta   = Phi_approx(zeta_pr);
 }
 
 model {
@@ -43,6 +43,8 @@ model {
   vector[2] ev_noise;      // noisy expected value
   real curUtil;     // utility of curFb
   real theta;       // theta = 3^c - 1
+
+
   
 // individual parameters
   A_pr      ~ normal(0, 1);
@@ -58,17 +60,22 @@ model {
   for (t in 1:T) {
     // softmax choice
     choice[t] ~ categorical_logit(theta * ev);
-    
     // update EV
     curUtil = gain[t];    
-    ev_noise[1] ~ normal(ev[1] + A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
-    ev_noise[2] ~ normal(ev[2] + A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
-    if (choice[t] == 1)
-      ev[1] = ev_noise[1];
-    if (choice[t] == 2)
-      ev[2] = ev_noise[2];
+    ev_noise[1] ~ normal(A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
+    ev_noise[2] ~ normal(A*(curUtil-ev[2]),zeta*fabs(ev[2] - curUtil));
+    
+    if (choice[t] == 1){
+      ev[1] = ev[1] + ev_noise[1];
+      //print("ev1 = ",ev[1]);
+    }
+    if (choice[t] == 2){
+      ev[2] = ev[2] + ev_noise[2];
+      //print("ev2 = ",ev[2]);
+    }
   }
 }
+
 
 
 generated quantities {
@@ -107,14 +114,20 @@ generated quantities {
         curUtil = gain[t];
 
 	// choice
-	ev_noise[1] = normal_rng(ev[1] + A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
-	ev_noise[2] = normal_rng(ev[2] + A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
-	if (choice[t] == 1)
-	  ev[1] = ev_noise[1];
-	if (choice[t] == 2)
-	  ev[2] = ev_noise[2];
+	ev_noise[1] = normal_rng(A*(curUtil-ev[1]),zeta*fabs(ev[1] - curUtil));
+	ev_noise[2] = normal_rng(A*(curUtil-ev[2]),zeta*fabs(ev[2] - curUtil));
+    
+	if (choice[t] == 1){
+	  ev[1] = ev[1] + ev_noise[1];
+	  //print("ev1 = ",ev[1]);
+	}
+	if (choice[t] == 2){
+	  ev[2] = ev[2] + ev_noise[2];
+	  //print("ev2 = ",ev[2]);
+	}
       }
   }
 }
+  
 
 
